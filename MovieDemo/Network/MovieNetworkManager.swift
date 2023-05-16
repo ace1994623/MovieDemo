@@ -7,11 +7,28 @@
 
 import Foundation
 
-class MovieNetworkManager {
+protocol NetworkRequestProtocol {
     // MARK: - Typeaias
     /// A typealias for the network request completion blocks
     typealias CompletionHandler = (_ responseModel: Decodable?, _ error: NSError?) -> Void
     
+    // MARK: - Method
+    func getRequest<T: Decodable>(urlString: String,
+                                  parameters: [String: Any]?,
+                                  headers: [String: String]?,
+                                  modelClass: T.Type,
+                                  success: @escaping CompletionHandler,
+                                  failure: @escaping CompletionHandler)
+    
+    func postRequest<T: Decodable>(urlString: String,
+                                   parameters: [String: Any]?,
+                                   headers: [String: String]?,
+                                   modelClass: T.Type,
+                                   success: @escaping CompletionHandler,
+                                   failure: @escaping CompletionHandler)
+}
+
+class MovieNetworkManager : NetworkRequestProtocol {
     // MARK: - Properties
     static let shared = MovieNetworkManager()
     private let session: URLSession
@@ -101,11 +118,11 @@ class MovieNetworkManager {
     /*
      Create session task to send the request
      */
-    private func sendRequest<T: Decodable>(request: URLRequest,
-                                           headers: [String: String]? = nil,
-                                           modelClass: T.Type,
-                                           success: @escaping CompletionHandler,
-                                           failure: @escaping CompletionHandler) {
+    func sendRequest<T: Decodable>(request: URLRequest,
+                                   headers: [String: String]? = nil,
+                                   modelClass: T.Type,
+                                   success: @escaping CompletionHandler,
+                                   failure: @escaping CompletionHandler) {
         var req = request
         // Add headers to the request if they were provided
         if let head = headers {

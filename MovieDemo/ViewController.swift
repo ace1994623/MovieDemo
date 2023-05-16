@@ -68,7 +68,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     func requestMovieList(keyWord: String) {
         // Show loading view while request
         AlertManager.shared.showLoading()
-        MovieListRequest.requestMovieList(query: keyWord)
+        MovieListRequest.requestMovieList(query: keyWord,
+                                          networkManager: MovieNetworkManager.shared)
         { responseModel, error in
             // Hide loading view while get result
             AlertManager.shared.hideLoading()
@@ -107,7 +108,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         // Show loading view while request
         AlertManager.shared.showLoading()
         
-        MovieListRequest.requestMovieList(query: keyWord, page: nextPage)
+        MovieListRequest.requestMovieList(query: keyWord,
+                                          page: nextPage,
+                                          networkManager: MovieNetworkManager.shared)
         { responseModel, error in
             if let model = responseModel as? MoviesListModel {
                 // Hide loading view while get result

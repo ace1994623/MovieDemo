@@ -13,6 +13,7 @@ class BaseRequest {
      Base requset function, allow subclass to call after set specific paramters and headers
      */
     static func request<T: Decodable>(url: String?,
+                                      networkManager: NetworkRequestProtocol,
                                       parameters: [String: Any]? = nil,
                                       headers: [String: String]? = nil,
                                       modelClass: T.Type,
@@ -28,7 +29,7 @@ class BaseRequest {
     }
     
     /*
-      Add default params to a given params, and allow override the default params
+     Add default params to a given params, and allow override the default params
      */
     private static func addDefaultParams(paramters: [String: Any]?) -> [String: Any] {
         var res : [String: Any] = ["api_key" : Constants.Network.Keys.moviesAPIKey]

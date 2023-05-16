@@ -14,6 +14,7 @@ class MovieListRequest : BaseRequest {
      */
     static func requestMovieList(query: String,
                                  page: Int = 1,
+                                 networkManager: NetworkRequestProtocol,
                                  success: @escaping MovieNetworkManager.CompletionHandler,
                                  failure: @escaping MovieNetworkManager.CompletionHandler) {
         // Config the Url
@@ -28,6 +29,7 @@ class MovieListRequest : BaseRequest {
         
         // Send request
         self.request(url: url,
+                     networkManager: networkManager,
                      parameters: params,
                      modelClass: MoviesListModel.self,
                      success: { responseModel, error in

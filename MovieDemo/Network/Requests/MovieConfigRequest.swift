@@ -12,11 +12,12 @@ class MovieConfigRequest : BaseRequest {
     /*
      Request the image downloading config
      */
-    static func requestConfig() {
+    static func requestConfig(networkManager: NetworkRequestProtocol) {
         let url = Constants.Network.Domains.moviesDomain
         + Constants.Network.URLs.configurationPath
         
         self.request(url: url,
+                     networkManager: networkManager,
                      modelClass: MoviesConfigModel.self)
         { responseModel, error in
             if let model = responseModel as? MoviesConfigModel {
