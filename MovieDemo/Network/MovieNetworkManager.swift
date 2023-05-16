@@ -12,6 +12,8 @@ protocol NetworkRequestProtocol {
     /// A typealias for the network request completion blocks
     typealias CompletionHandler = (_ responseModel: Decodable?, _ error: NSError?) -> Void
     
+    func shared() -> NetworkRequestProtocol
+    
     // MARK: - Method
     func getRequest<T: Decodable>(urlString: String,
                                   parameters: [String: Any]?,
@@ -40,6 +42,9 @@ class MovieNetworkManager : NetworkRequestProtocol {
     }
     
     // MARK: - Public
+    func shared() -> NetworkRequestProtocol {
+        MovieNetworkManager.shared
+    }
     /*
      Perform a GET request to the given URL, with optional query parameters and headers.
      */

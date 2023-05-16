@@ -20,12 +20,12 @@ class BaseRequest {
                                       success: @escaping MovieNetworkManager.CompletionHandler,
                                       failure: @escaping MovieNetworkManager.CompletionHandler) {
         // Send request
-        MovieNetworkManager.shared.getRequest(urlString: url ?? "",
-                                              parameters: addDefaultParams(paramters: parameters),
-                                              headers: addDefaultHeaders(headers: headers),
-                                              modelClass: modelClass,
-                                              success: success,
-                                              failure: failure)
+        networkManager.shared().getRequest(urlString: url ?? "",
+                                         parameters: addDefaultParams(paramters: parameters),
+                                         headers: addDefaultHeaders(headers: headers),
+                                         modelClass: modelClass,
+                                         success: success,
+                                         failure: failure)
     }
     
     /*
