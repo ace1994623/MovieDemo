@@ -132,7 +132,8 @@ class MovieSerchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITabl
         
         // If the text is empty or only contains white space, show alert to user
         if keyword.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            // TODO: show alert cannot serach empty word
+            // Show alert that cannot serach empty word
+            AlertManager.showToast(message: Constants.Errors.Msg.emptyKeywordError)
         } else if let block = self.onClickSearchBlock {
             // Update the search string
             searchText = keyword

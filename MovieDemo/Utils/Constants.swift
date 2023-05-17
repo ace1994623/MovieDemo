@@ -103,6 +103,8 @@ enum Constants {
             static let netWorkError = -10005
             /// Fail to fetch result remotely, use the local result
             static let netWorkErrorWithLocalResuslt = -10006
+            /// User search with empth word or word only contains space
+            static let emptyKeywordError = -20001
         }
         
         /*
@@ -116,6 +118,7 @@ enum Constants {
             static let emptyResponse = "No result, please change another keyword"
             static let netWorkError = "Network error, and there's no local result, please check your network connection and try again later"
             static let netWorkErrorWithLocalResuslt = "Get data through offline mode, due to network issue"
+            static let emptyKeywordError = "Not allow to search with keyword only contains space, please change another keyword"
         }
     }
 }
